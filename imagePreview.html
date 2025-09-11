@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image URLs Preview</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .image-item { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .image-item img { width: 100%; height: 200px; object-fit: cover; }
+        .image-info { padding: 15px; }
+        .image-name { font-weight: bold; margin-bottom: 8px; color: #333; }
+        .image-url { word-break: break-all; font-size: 12px; color: #666; background: #f8f9fa; padding: 8px; border-radius: 4px; margin: 8px 0; }
+        .copy-btn { background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .copy-btn:hover { background: #0056b3; }
+        .stats { display: flex; gap: 20px; margin-bottom: 20px; }
+        .stat { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 24px; font-weight: bold; color: #007bff; }
+        .stat-label { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖼️ Image URLs Preview</h1>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Total Images</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">http://localhost:5000/photos</div>
+                    <div class="stat-label">Base URL</div>
+                </div>
+            </div>
+        </div>
+        <div class="image-grid">
+
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0060.jpg" alt="IMG-20250728-WA0060" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0060</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0060.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0060.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0064.jpg" alt="IMG-20250728-WA0064" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0064</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0064.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0064.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0065.jpg" alt="IMG-20250728-WA0065" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0065</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0065.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0065.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0066.jpg" alt="IMG-20250728-WA0066" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0066</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0066.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0066.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0068.jpg" alt="IMG-20250728-WA0068" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0068</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0068.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0068.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0069.jpg" alt="IMG-20250728-WA0069" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0069</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0069.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0069.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0070.jpg" alt="IMG-20250728-WA0070" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0070</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0070.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0070.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0071.jpg" alt="IMG-20250728-WA0071" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0071</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0071.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0071.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0072.jpg" alt="IMG-20250728-WA0072" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0072</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0072.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0072.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0073.jpg" alt="IMG-20250728-WA0073" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0073</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0073.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0073.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0074.jpg" alt="IMG-20250728-WA0074" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0074</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0074.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0074.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0075.jpg" alt="IMG-20250728-WA0075" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0075</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0075.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0075.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0076.jpg" alt="IMG-20250728-WA0076" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0076</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0076.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0076.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0077.jpg" alt="IMG-20250728-WA0077" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0077</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0077.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0077.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/IMG-20250728-WA0078.jpg" alt="IMG-20250728-WA0078" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">IMG-20250728-WA0078</div>
+                <div class="image-url">http://localhost:5000/photos/IMG-20250728-WA0078.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/IMG-20250728-WA0078.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        <div class="image-item">
+            <img src="http://localhost:5000/photos/WhatsApp%20Image%202025-07-28%20at%2007.27.09_0d329045.jpg" alt="WhatsApp Image 2025-07-28 at 07.27.09_0d329045" onerror="this.style.display='none'">
+            <div class="image-info">
+                <div class="image-name">WhatsApp Image 2025-07-28 at 07.27.09_0d329045</div>
+                <div class="image-url">http://localhost:5000/photos/WhatsApp%20Image%202025-07-28%20at%2007.27.09_0d329045.jpg</div>
+                <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000/photos/WhatsApp%20Image%202025-07-28%20at%2007.27.09_0d329045.jpg')">📋 Copy URL</button>
+            </div>
+        </div>
+    
+        </div>
+    </div>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show a temporary success message
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#007bff';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('URL copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

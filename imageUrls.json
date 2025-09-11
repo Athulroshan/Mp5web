@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2025-07-30T16:06:46.938Z",
+  "baseUrl": "http://localhost:5000/photos",
+  "totalImages": 16,
+  "images": [
+    {
+      "filename": "IMG-20250728-WA0060.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0060.jpg",
+      "name": "IMG-20250728-WA0060"
+    },
+    {
+      "filename": "IMG-20250728-WA0064.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0064.jpg",
+      "name": "IMG-20250728-WA0064"
+    },
+    {
+      "filename": "IMG-20250728-WA0065.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0065.jpg",
+      "name": "IMG-20250728-WA0065"
+    },
+    {
+      "filename": "IMG-20250728-WA0066.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0066.jpg",
+      "name": "IMG-20250728-WA0066"
+    },
+    {
+      "filename": "IMG-20250728-WA0068.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0068.jpg",
+      "name": "IMG-20250728-WA0068"
+    },
+    {
+      "filename": "IMG-20250728-WA0069.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0069.jpg",
+      "name": "IMG-20250728-WA0069"
+    },
+    {
+      "filename": "IMG-20250728-WA0070.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0070.jpg",
+      "name": "IMG-20250728-WA0070"
+    },
+    {
+      "filename": "IMG-20250728-WA0071.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0071.jpg",
+      "name": "IMG-20250728-WA0071"
+    },
+    {
+      "filename": "IMG-20250728-WA0072.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0072.jpg",
+      "name": "IMG-20250728-WA0072"
+    },
+    {
+      "filename": "IMG-20250728-WA0073.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0073.jpg",
+      "name": "IMG-20250728-WA0073"
+    },
+    {
+      "filename": "IMG-20250728-WA0074.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0074.jpg",
+      "name": "IMG-20250728-WA0074"
+    },
+    {
+      "filename": "IMG-20250728-WA0075.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0075.jpg",
+      "name": "IMG-20250728-WA0075"
+    },
+    {
+      "filename": "IMG-20250728-WA0076.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0076.jpg",
+      "name": "IMG-20250728-WA0076"
+    },
+    {
+      "filename": "IMG-20250728-WA0077.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0077.jpg",
+      "name": "IMG-20250728-WA0077"
+    },
+    {
+      "filename": "IMG-20250728-WA0078.jpg",
+      "url": "http://localhost:5000/photos/IMG-20250728-WA0078.jpg",
+      "name": "IMG-20250728-WA0078"
+    },
+    {
+      "filename": "WhatsApp Image 2025-07-28 at 07.27.09_0d329045.jpg",
+      "url": "http://localhost:5000/photos/WhatsApp%20Image%202025-07-28%20at%2007.27.09_0d329045.jpg",
+      "name": "WhatsApp Image 2025-07-28 at 07.27.09_0d329045"
+    }
+  ]
+}
