@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "framework": "vite",
-  "outputDirectory": "dist",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "public": true
-}
