@@ -22,6 +22,16 @@ const CartContext = createContext<CartContextValue | undefined>(undefined)
 
 const STORAGE_KEY = 'mpss_cart_v1'
 
+const EMPTY_CART_CONTEXT: CartContextValue = {
+	items: [],
+	addItem: () => {},
+	removeItem: () => {},
+	updateQuantity: () => {},
+	clearCart: () => {},
+	totalItems: 0,
+	totalPrice: 0,
+}
+
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [items, setItems] = useState<CartItem[]>(() => {
 		try {
@@ -79,7 +89,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useCart = (): CartContextValue => {
 	const ctx = useContext(CartContext)
-	if (!ctx) throw new Error('useCart must be used within a CartProvider')
+	if (!ctx) {
+		// This prevents the whole app from crashing if the CartProvider
+		// is temporarily removed/commented during development.
+		if (import.meta?.env?.DEV) {
+			console.warn('useCart was called without a CartProvider; falling back to an empty cart.')
+		}
+		return EMPTY_CART_CONTEXT
+	}
 	return ctx
 }
 

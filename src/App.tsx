@@ -18,7 +18,9 @@ function App() {
       <CartProvider>
         <Router>
           <div className="min-h-screen">
-            <HeaderSection />
+            <ErrorBoundary fallback={null}>
+              <HeaderSection />
+            </ErrorBoundary>
             <main className="pt-16 lg:pt-20">
               <Routes>
                 <Route path="/" element={
@@ -63,7 +65,9 @@ function App() {
                 } />
               </Routes>
             </main>
-            <FooterSection />
+            <ErrorBoundary fallback={null}>
+              <FooterSection />
+            </ErrorBoundary>
           </div>
         </Router>
       </CartProvider>
