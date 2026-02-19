@@ -10,7 +10,6 @@
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
-    "NPM_FLAGS": "--legacy-peer-deps",
-    "NODE_VERSION": "20"
+    "NPM_FLAGS": "--legacy-peer-deps"
   }
 }
