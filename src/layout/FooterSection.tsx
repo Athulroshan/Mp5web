@@ -99,7 +99,6 @@ const FooterSection: React.FC = () => {
                 { to: '/', label: 'Home' },
                 { to: '/products', label: 'Products' },
                 { to: '/about', label: 'About Us' },
-                { to: '/customization', label: 'Customization' },
                 { to: '/inspection', label: 'Inspection' },
                 { to: '/contact', label: 'Contact' }
               ].map((link, index) => (

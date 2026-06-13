@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Search, ShoppingCart, Heart, Menu, X, ChevronDown } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import Logo from '../components/Logo'
@@ -8,6 +8,8 @@ const HeaderSection: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { totalItems } = useCart()
+  const location = useLocation()
+  const isServicesPage = location.pathname === '/services-page'
 
   // Handle scroll effect
   useEffect(() => {
@@ -43,7 +45,7 @@ const HeaderSection: React.FC = () => {
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <Logo className="h-10 w-auto lg:h-12" showText={true} />
+            <Logo className="h-10 w-auto lg:h-12" showText={false} />
           </div>  
           
           {/* Desktop Navigation */}
@@ -52,22 +54,16 @@ const HeaderSection: React.FC = () => {
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link to="/products" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-              Products
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+            {!isServicesPage && (
+              <Link to="/products" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
+                Products
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            )}
             <Link to="/about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <button 
-              className="text-gray-400 px-3 py-2 text-sm font-medium cursor-not-allowed opacity-60 flex items-center space-x-1"
-              title="Under Development - Coming Soon"
-              disabled
-            >
-              <span>Customization</span>
-              <ChevronDown className="h-3 w-3" />
-            </button>
             <Link to="/inspection" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
               Inspection
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
@@ -116,13 +112,15 @@ const HeaderSection: React.FC = () => {
             >
               Home
             </Link>
-            <Link 
-              to="/products" 
-              className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-              onClick={handleNavClick}
-            >
-              Products
-            </Link>
+            {!isServicesPage && (
+              <Link 
+                to="/products" 
+                className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                onClick={handleNavClick}
+              >
+                Products
+              </Link>
+            )}
             <Link 
               to="/about" 
               className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
@@ -130,13 +128,6 @@ const HeaderSection: React.FC = () => {
             >
               About
             </Link>
-            <button 
-              className="w-full text-left px-3 py-3 text-gray-400 cursor-not-allowed opacity-60 flex items-center justify-between"
-              disabled
-            >
-              <span>Customization</span>
-              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Coming Soon</span>
-            </button>
             <Link 
               to="/inspection" 
               className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"

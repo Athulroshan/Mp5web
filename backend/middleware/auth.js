@@ -14,14 +14,31 @@ const protect = async (req, res, next) => {
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Get user from token
-      req.user = await User.findById(decoded.id).select('-password');
+      if (decoded.id === process.env.ADMIN_ID || decoded.id === 'admin') {
+        req.user = {
+          id: process.env.ADMIN_ID || 'admin',
+          name: process.env.ADMIN_NAME || 'Administrator',
+          email: process.env.ADMIN_EMAIL || 'admin@mpss.com',
+          role: 'admin',
+          isActive: true
+        };
+      } else {
+        // Get user from token
+        req.user = await User.findById(decoded.id).select('-password');
 
-      if (!req.user) {
-        return res.status(401).json({
-          success: false,
-          message: 'User not found'
-        });
+        if (!req.user) {
+          return res.status(401).json({
+            success: false,
+            message: 'User not found'
+          });
+        }
+
+        if (!req.user.isActive) {
+          return res.status(401).json({
+            success: false,
+            message: 'User account is deactivated'
+          });
+        }
       }
 
       if (!req.user.isActive) {
@@ -69,7 +86,17 @@ const optionalAuth = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select('-password');
+      if (decoded.id === process.env.ADMIN_ID || decoded.id === 'admin') {
+        req.user = {
+          id: process.env.ADMIN_ID || 'admin',
+          name: process.env.ADMIN_NAME || 'Administrator',
+          email: process.env.ADMIN_EMAIL || 'admin@mpss.com',
+          role: 'admin',
+          isActive: true
+        };
+      } else {
+        req.user = await User.findById(decoded.id).select('-password');
+      }
     } catch (error) {
       // Token is invalid, but we don't fail the request
       console.log('Optional auth token invalid:', error.message);

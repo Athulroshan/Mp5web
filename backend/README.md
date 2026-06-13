@@ -85,6 +85,18 @@ Content-Type: application/json
 }
 ```
 
+#### Admin Login
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin",
+  "password": "<ADMIN_PASSWORD_FROM_CONFIG>"
+}
+```
+> Admin credentials are configured in `backend/config.env` as `ADMIN_USERNAME` and `ADMIN_PASSWORD`.
+
 #### Get Profile
 ```http
 GET /api/auth/me

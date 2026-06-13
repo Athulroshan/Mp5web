@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import HeaderSection from './layout/HeaderSection'
 import FooterSection from './layout/FooterSection'
+import LandingPage from './pages/LandingPage'
 import HomePage from './pages/HomePage'
+import ProductsPage from './pages/ProductsPage'
+import ServicesPage from './pages/ServicesPage'
 import ProductListingPage from './pages/ProductListingPage'
 import ContactUsPage from './pages/ContactUsPage'
 import AboutUsPage from './pages/AboutUsPage'
@@ -12,20 +15,37 @@ import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import { CartProvider } from './context/CartContext'
 
-function App() {
+function AppContent() {
+  const location = useLocation()
+  const isLandingPage = location.pathname === '/'
+
   return (
-    <ErrorBoundary>
-      <CartProvider>
-        <Router>
-          <div className="min-h-screen">
-            <ErrorBoundary fallback={null}>
-              <HeaderSection />
-            </ErrorBoundary>
-            <main className="pt-16 lg:pt-20">
+    <div className="min-h-screen">
+      {!isLandingPage && (
+        <ErrorBoundary fallback={null}>
+          <HeaderSection />
+        </ErrorBoundary>
+      )}
+      <main className={isLandingPage ? '' : 'pt-16 lg:pt-20'}>
               <Routes>
                 <Route path="/" element={
                   <ErrorBoundary>
+                    <LandingPage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/home" element={
+                  <ErrorBoundary>
                     <HomePage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/products-page" element={
+                  <ErrorBoundary>
+                    <ProductsPage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/services-page" element={
+                  <ErrorBoundary>
+                    <ServicesPage />
                   </ErrorBoundary>
                 } />
                 <Route path="/products" element={
@@ -65,10 +85,21 @@ function App() {
                 } />
               </Routes>
             </main>
-            <ErrorBoundary fallback={null}>
-              <FooterSection />
-            </ErrorBoundary>
-          </div>
+      {!isLandingPage && (
+        <ErrorBoundary fallback={null}>
+          <FooterSection />
+        </ErrorBoundary>
+      )}
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <CartProvider>
+        <Router>
+          <AppContent />
         </Router>
       </CartProvider>
     </ErrorBoundary>

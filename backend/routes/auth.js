@@ -13,6 +13,12 @@ const generateToken = (id) => {
   });
 };
 
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'adminmpss';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '123456';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@mpss.com';
+const ADMIN_NAME = process.env.ADMIN_NAME || 'Administrator';
+const ADMIN_ID = process.env.ADMIN_ID || 'admin';
+
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
@@ -88,9 +94,8 @@ router.post('/register', [
 // @access  Public
 router.post('/login', [
   body('email')
-    .isEmail()
-    .normalizeEmail()
-    .withMessage('Please provide a valid email'),
+    .notEmpty()
+    .withMessage('Username or email is required'),
   body('password')
     .notEmpty()
     .withMessage('Password is required')
@@ -106,10 +111,36 @@ router.post('/login', [
       });
     }
 
-    const { email, password } = req.body;
+    const { email: identifier, password } = req.body;
+
+    // Allow a simple built-in admin login by username
+    if (identifier === ADMIN_USERNAME) {
+      if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({
+          success: false,
+          message: 'Invalid credentials'
+        });
+      }
+
+      const token = generateToken(ADMIN_ID);
+      return res.json({
+        success: true,
+        message: 'Login successful',
+        data: {
+          user: {
+            id: ADMIN_ID,
+            name: ADMIN_NAME,
+            email: ADMIN_EMAIL,
+            role: 'admin',
+            avatar: ''
+          },
+          token
+        }
+      });
+    }
 
     // Find user and include password for comparison
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email: identifier }).select('+password');
     
     if (!user) {
       return res.status(401).json({
@@ -239,6 +270,61 @@ router.put('/profile', protect, [
     res.status(500).json({
       success: false,
       message: 'Server error while updating profile'
+    });
+  }
+});
+
+// @route   PUT /api/auth/change-password
+// @desc    Change the current user's password
+// @access  Private
+router.put('/change-password', protect, [
+  body('oldPassword')
+    .notEmpty()
+    .withMessage('Current password is required'),
+  body('newPassword')
+    .isLength({ min: 6 })
+    .withMessage('New password must be at least 6 characters long')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation errors',
+        errors: errors.array()
+      });
+    }
+
+    const { oldPassword, newPassword } = req.body;
+    const user = await User.findById(req.user.id).select('+password');
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    const isPasswordValid = await user.comparePassword(oldPassword);
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Current password is incorrect'
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Password updated successfully'
+    });
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while changing password'
     });
   }
 });

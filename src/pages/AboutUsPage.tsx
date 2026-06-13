@@ -52,74 +52,22 @@ const AboutUsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Stats Section (unchanged) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-20 lg:mb-24">
-          {[
-            { number: '10K+', label: 'Custom Orders Delivered' },
-            { number: '95%', label: 'Customer Satisfaction' },
-            { number: '500+', label: 'Inspection Projects Completed' },
-            { number: '50+', label: 'Global Partners' },
-          ].map((stat, index) => (
-            <div 
-              key={index} 
-              className={`text-center transform transition-all duration-1000 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-indigo-600 mb-2">
-                {stat.number}
-              </div>
-              <div className="text-sm sm:text-base text-gray-600">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Story + Inspection (your original long content, unchanged) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-24">
           <div className={`transition-all duration-1000 delay-300 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
-              Our Story
+              Inspection Services
             </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed text-base lg:text-lg">
+            <div className="space-y-6 text-gray-600 leading-relaxed text-base lg:text-lg">
               <p>
-                Founded with a vision to transform the apparel industry, My Profile Sourcing Solution 
-                emerged from a simple belief: clothing should be as unique as the person wearing it. 
-                We recognized that traditional retail models created waste, limited personalization, 
-                and disconnected customers from the creation process.
+                We provide <strong>third-party garment inspection services</strong> that ensure every order meets high quality and compliance standards before shipment.
               </p>
               <p>
-                Our journey began with a commitment to sustainable, personalized fashion. We built a 
-                system that allows customers to design their perfect piece, then craft it specifically 
-                for them. This approach eliminates waste, reduces environmental impact, and creates 
-                truly meaningful connections between people and their clothing.
+                Each product is checked for stitching, fabric strength, sizing, color accuracy, and finish. This helps prevent defects and builds confidence in your final delivery.
               </p>
               <p>
-                Today, we serve thousands of customers who appreciate quality, sustainability, and 
-                personalization. Every order we receive is a new opportunity to create something 
-                extraordinary – something that reflects the unique personality and style of its owner.
-              </p>
-            </div>
-
-            {/* Inspection Process */}
-            <div className="mt-10 border-t pt-8">
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                Our Inspection Process
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Along with custom apparel production, we also specialize in <strong>third-party garment 
-                inspection services</strong>. Every product undergoes a strict quality check before it 
-                leaves our facility. Our inspection ensures that stitching, fabric quality, sizing, 
-                color accuracy, and finishing meet international standards. 
-              </p>
-              <p className="text-gray-600 leading-relaxed mt-4">
-                By combining <strong>custom apparel manufacturing</strong> with a professional 
-                <strong> inspection process</strong>, we guarantee that each piece is not only 
-                personalized to your style but also meets the highest level of quality and durability. 
-                This dual approach sets us apart and builds trust with both individual customers and 
-                business clients worldwide.
+                With a clear pass/fail summary and concise next-step guidance, our inspection process keeps quality simple and transparent.
               </p>
             </div>
           </div>

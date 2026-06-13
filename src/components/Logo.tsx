@@ -13,11 +13,11 @@ const Logo: React.FC<LogoProps> = ({
   const [imageError, setImageError] = useState(false);
   const [currentSource, setCurrentSource] = useState(0);
 
-  // Multiple sources to try
+  // Multiple sources to try - try local sources first for faster loading
   const logoSources = [
-    "http://localhost:5000/photos/Head%20logo.jpg", // Backend server
-    "/photo/Head logo.jpg", // Public folder
-    "/photo/Head%20logo.jpg" // URL encoded version
+    "/photo/Head logo.jpg", // Public folder with space
+    "/photo/Head%20logo.jpg", // URL encoded version
+    "http://localhost:5000/photos/Head%20logo.jpg" // Backend server (fallback)
   ];
 
   const logoUrl = logoSources[currentSource] || logoSources[0];
