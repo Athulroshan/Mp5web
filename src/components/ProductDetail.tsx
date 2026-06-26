@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Heart, Share2, Truck, RotateCcw, Shield, Star, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
 import Button from './ui/Button'
 import { useCart } from '../context/CartContext'
+import ProductCustomizationPanel from './ProductCustomizationPanel'
 
 interface ProductImage {
   url: string
@@ -25,6 +26,7 @@ interface ProductDetailProps {
   badge?: string
   isWishlisted?: boolean
   onWishlistToggle?: () => void
+  autoOpenCustomize?: boolean
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({
@@ -43,7 +45,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   category,
   badge,
   isWishlisted = false,
-  onWishlistToggle
+  onWishlistToggle,
+  autoOpenCustomize = false
 }) => {
   const { addItem } = useCart()
   const [mainImageIndex, setMainImageIndex] = useState(0)
@@ -54,6 +57,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   const [showThumbnails, setShowThumbnails] = useState(true)
   const imageZoomRef = useRef<HTMLDivElement>(null)
   const [addedToCart, setAddedToCart] = useState(false)
+  const [isCustomizeOpen, setIsCustomizeOpen] = useState(autoOpenCustomize)
 
   const discount = originalPrice > price ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0
 
@@ -310,6 +314,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               >
                 {addedToCart ? '✓ Added to Cart' : 'Add to Cart'}
               </Button>
+              <Button
+                variant="secondary"
+                className="h-14"
+                onClick={() => setIsCustomizeOpen(true)}
+              >
+                Customize
+              </Button>
               <Button variant="outline" className="h-14 flex items-center justify-center gap-2">
                 <Share2 className="h-5 w-5" />
                 Share
@@ -352,6 +363,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           </div>
         </div>
       </div>
+      <ProductCustomizationPanel
+        isOpen={isCustomizeOpen}
+        onClose={() => setIsCustomizeOpen(false)}
+        product={{
+          id,
+          name,
+          price,
+          image: images[mainImageIndex]?.url || images[0]?.url || '/photo/t_shirt.png',
+          description,
+          category
+        }}
+      />
     </div>
   )
 }

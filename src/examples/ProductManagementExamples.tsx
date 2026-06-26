@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductDetail from '../components/ProductDetail'
-import AdminProductManager from '../components/AdminProductManager'
 import { productService } from '../services/productService'
 
 /**
@@ -100,64 +99,4 @@ const ProductPageExample: React.FC = () => {
   )
 }
 
-/**
- * Example Admin Product Manager Implementation
- * Shows how to integrate AdminProductManager with API
- */
-const AdminDashboardExample: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const token = localStorage.getItem('authToken') || ''
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true)
-        const response = await productService.getAllProducts()
-        setProducts(response.data || [])
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchProducts()
-  }, [])
-
-  const handleProductSave = async (productData: any) => {
-    try {
-      const response = await productService.createProduct(productData, token)
-      setProducts((prev) => [response.data, ...prev])
-      alert('Product added successfully!')
-    } catch (error) {
-      alert('Failed to add product')
-      console.error(error)
-    }
-  }
-
-  const handleProductDelete = async (productId: number) => {
-    try {
-      await productService.deleteProduct(productId.toString(), token)
-      setProducts((prev) => prev.filter((p) => p.id !== productId))
-      alert('Product deleted successfully!')
-    } catch (error) {
-      alert('Failed to delete product')
-      console.error(error)
-    }
-  }
-
-  if (loading) {
-    return <div className="text-center py-12">Loading products...</div>
-  }
-
-  return (
-    <AdminProductManager
-      products={products}
-      onProductSave={handleProductSave}
-      onProductDelete={handleProductDelete}
-    />
-  )
-}
-
-export { ProductPageExample, AdminDashboardExample }
+export { ProductPageExample }

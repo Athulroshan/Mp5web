@@ -4,12 +4,40 @@ import { Search, ShoppingCart, Heart, Menu, X, ChevronDown } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import Logo from '../components/Logo'
 
+interface NavItem {
+  label: string
+  to: string
+}
+
+const productLinks: NavItem[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Product', to: '/products' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' }
+]
+
+const serviceLinks: NavItem[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Inspection', to: '/inspection' },
+  { label: 'Contact', to: '/contact' }
+]
+
+const generalLinks: NavItem[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Products', to: '/products' },
+  { label: 'About', to: '/about' },
+  { label: 'Inspection', to: '/inspection' },
+  { label: 'Contact', to: '/contact' }
+]
+
 const HeaderSection: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { totalItems } = useCart()
   const location = useLocation()
-  const isServicesPage = location.pathname === '/services-page'
+  const isProductSection = location.pathname === '/products' || location.pathname === '/products-page'
+  const isServiceSection = location.pathname === '/services-page' || location.pathname === '/inspection'
+  const navigationLinks = isProductSection ? productLinks : isServiceSection ? serviceLinks : generalLinks
 
   // Handle scroll effect
   useEffect(() => {
@@ -50,43 +78,32 @@ const HeaderSection: React.FC = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-              Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            {!isServicesPage && (
-              <Link to="/products" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-                Products
+            {navigationLinks.map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+              >
+                {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
-            )}
-            <Link to="/about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-              About
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link to="/inspection" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-              Inspection
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group">
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+            ))}
           </nav>
-          
-          {/* Desktop Action Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200" title="Search">
-              <Search className="h-5 w-5" />
-            </button>
-            <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200" title="Wishlist">
-              <Heart className="h-5 w-5" />
-            </button>
-            <Link to="/cart" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200 relative" title="Shopping Cart">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{totalItems}</span>
-            </Link>
-          </div>
+
+          {isProductSection || isServiceSection ? null : (
+            <div className="hidden lg:flex items-center space-x-4">
+              <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200" title="Search">
+                <Search className="h-5 w-5" />
+              </button>
+              <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200" title="Wishlist">
+                <Heart className="h-5 w-5" />
+              </button>
+              <Link to="/cart" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200 relative" title="Shopping Cart">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{totalItems}</span>
+              </Link>
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
           <button 
@@ -105,63 +122,36 @@ const HeaderSection: React.FC = () => {
             : 'max-h-0 opacity-0 invisible'
         } overflow-hidden`}>
           <nav className="py-4 space-y-2 border-t border-gray-200">
-            <Link 
-              to="/" 
-              className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-              onClick={handleNavClick}
-            >
-              Home
-            </Link>
-            {!isServicesPage && (
-              <Link 
-                to="/products" 
+            {navigationLinks.map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
                 className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
                 onClick={handleNavClick}
               >
-                Products
+                {link.label}
               </Link>
-            )}
-            <Link 
-              to="/about" 
-              className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-              onClick={handleNavClick}
-            >
-              About
-            </Link>
-            <Link 
-              to="/inspection" 
-              className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-              onClick={handleNavClick}
-            >
-              Inspection
-            </Link>
-            <Link 
-              to="/contact" 
-              className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-              onClick={handleNavClick}
-            >
-              Contact
-            </Link>
+            ))}
           </nav>
-          
-          {/* Mobile Action Buttons */}
-          <div className="py-4 border-t border-gray-200">
-            <div className="grid grid-cols-3 gap-2">
-              <button className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                <Search className="h-5 w-5 mb-1" />
-                <span className="text-xs">Search</span>
-              </button>
-              <button className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                <Heart className="h-5 w-5 mb-1" />
-                <span className="text-xs">Wishlist</span>
-              </button>
-              <Link to="/cart" className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 relative">
-                <ShoppingCart className="h-5 w-5 mb-1" />
-                <span className="text-xs">Cart</span>
-                <span className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">{totalItems}</span>
-              </Link>
+          {isProductSection || isServiceSection ? null : (
+            <div className="py-4 border-t border-gray-200">
+              <div className="grid grid-cols-3 gap-2">
+                <button className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                  <Search className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Search</span>
+                </button>
+                <button className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                  <Heart className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Wishlist</span>
+                </button>
+                <Link to="/cart" className="flex flex-col items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 relative">
+                  <ShoppingCart className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Cart</span>
+                  <span className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">{totalItems}</span>
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </header>

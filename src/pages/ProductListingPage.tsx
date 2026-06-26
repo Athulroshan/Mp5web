@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 // ...existing code...
 import { Card, CardContent, CardFooter } from '../components/ui/Card'
 import Button from '../components/ui/Button'
@@ -9,6 +10,7 @@ import { useCart } from '../context/CartContext'
 
 const ProductListingPage: React.FC = () => {
   try {
+  const navigate = useNavigate()
   const { addItem } = useCart()
   const [showToast, setShowToast] = useState(false)
   const [toastProduct, setToastProduct] = useState<string>('')
@@ -528,6 +530,18 @@ const ProductListingPage: React.FC = () => {
       }).format(amount)
     }
 
+    const openProductDetails = (product: any, customize = false) => {
+      const query = customize ? '?customize=true' : ''
+      navigate(`/products/${product.id}${query}`, {
+        state: {
+          product: {
+            ...product,
+            images: product.images || []
+          }
+        }
+      })
+    }
+
     return (
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -835,7 +849,7 @@ const ProductListingPage: React.FC = () => {
                         <div className="flex flex-wrap gap-2 mb-4">
                           <div className="flex items-center gap-1">
                             <span className="text-xs text-gray-500">Colors:</span>
-                            {product.colors && product.colors.slice(0, 3).map((color, index) => (
+                            {product.colors && product.colors.slice(0, 3).map((color: string, index: number) => (
                               <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
                                 {color}
                               </span>
@@ -848,22 +862,21 @@ const ProductListingPage: React.FC = () => {
                       </CardContent>
 
                       <CardFooter className={`${viewMode === 'list' ? 'p-0' : 'p-4 pt-0'}`}>
-                        <div className="flex gap-2 w-full">
+                        <div className="flex gap-2 w-full flex-wrap">
                           <Button
-                            className="flex-1"
+                            className="flex-1 min-w-[120px]"
                             size="sm"
-                            onClick={() => {
-                              addItem({ id: product.id, name: product.name, price: product.price, image: product.images?.[0] })
-                              setToastProduct(product.name)
-                              setShowToast(true)
-                              setTimeout(() => setShowToast(false), 1800)
-                            }}
+                            variant="outline"
+                            onClick={() => openProductDetails(product)}
                           >
-                            <ShoppingCart className="h-4 w-4 mr-2 animate-bounce" />
-                            Add to Cart
+                            View Details
                           </Button>
-                          <Button variant="outline" size="sm">
-                            Quick View
+                          <Button
+                            className="flex-1 min-w-[120px] bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700"
+                            size="sm"
+                            onClick={() => openProductDetails(product, true)}
+                          >
+                            Customize
                           </Button>
                         </div>
                       </CardFooter>

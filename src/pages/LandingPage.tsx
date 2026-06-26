@@ -8,14 +8,14 @@ const LandingPage: React.FC = () => {
       
       {/* Decorative Elements - Top Left */}
       <div className="absolute top-10 left-8 opacity-30">
-        <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-indigo-600">
+        <svg className="w-24 h-24 text-indigo-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M30 20L70 20M25 30L40 80M75 30L60 80M52 30L52 80M48 30L48 80" strokeLinecap="round" />
         </svg>
       </div>
 
       {/* Decorative Elements - Top Right */}
       <div className="absolute top-20 right-10 opacity-30">
-        <svg className="w-20 h-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-purple-600">
+        <svg className="w-20 h-20 text-purple-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
           <circle cx="50" cy="50" r="45" />
           <path d="M50 20V80M20 50H80" strokeLinecap="round" />
           <circle cx="50" cy="50" r="10" fill="currentColor" />
@@ -24,7 +24,7 @@ const LandingPage: React.FC = () => {
 
       {/* Decorative Elements - Bottom Left */}
       <div className="absolute bottom-20 left-10 opacity-30 rotate-45">
-        <svg className="w-28 h-28" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-pink-600">
+        <svg className="w-28 h-28 text-pink-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M20 50Q50 20 80 50Q50 80 20 50" />
           <path d="M35 50Q50 35 65 50Q50 65 35 50" />
         </svg>
@@ -32,7 +32,7 @@ const LandingPage: React.FC = () => {
 
       {/* Decorative Elements - Bottom Right */}
       <div className="absolute bottom-10 right-8 opacity-30">
-        <svg className="w-32 h-32" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-blue-600">
+        <svg className="w-32 h-32 text-blue-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M30 20L70 20L85 50L70 80L30 80L15 50Z" />
           <line x1="50" y1="20" x2="50" y2="80" />
           <line x1="30" y1="50" x2="70" y2="50" />
@@ -65,7 +65,7 @@ const LandingPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center mb-16 sm:mb-20 lg:mb-24 px-2">
           {/* Products Button */}
           <Link
-            to="/products-page"
+            to="/products"
             className="w-full sm:w-auto group flex items-center justify-center gap-3 rounded-full bg-white text-indigo-900 px-10 sm:px-12 lg:px-14 py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
           >
             <ShoppingBag className="w-6 h-6 sm:w-7 sm:h-7 group-hover:rotate-12 transition-transform" />
@@ -74,7 +74,7 @@ const LandingPage: React.FC = () => {
 
           {/* Services Button */}
           <Link
-            to="/services-page"
+            to="/services"
             className="w-full sm:w-auto group flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-10 sm:px-12 lg:px-14 py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
           >
             <Zap className="w-6 h-6 sm:w-7 sm:h-7 group-hover:rotate-12 transition-transform" />

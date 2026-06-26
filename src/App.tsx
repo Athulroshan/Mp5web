@@ -1,96 +1,174 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import HeaderSection from './layout/HeaderSection'
-import FooterSection from './layout/FooterSection'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
-import HomePage from './pages/HomePage'
-import ProductsPage from './pages/ProductsPage'
 import ServicesPage from './pages/ServicesPage'
 import ProductListingPage from './pages/ProductListingPage'
-import ContactUsPage from './pages/ContactUsPage'
-import AboutUsPage from './pages/AboutUsPage'
-import Customization from './pages/Customization'
 import InspectionPage from './pages/InspectionPage'
 import ErrorBoundary from './components/ErrorBoundary'
-import CartPage from './pages/CartPage'
-import CheckoutPage from './pages/CheckoutPage'
+import ProductDetailsPage from './pages/ProductDetailsPage'
+import ProductLayout from './layout/ProductLayout'
+import ServiceLayout from './layout/ServiceLayout'
+import ProductCategoryPage from './pages/products/ProductCategoryPage'
+import ProductAboutPage from './pages/products/ProductAboutPage'
+import ProductContactPage from './pages/products/ProductContactPage'
+import ProductFaqPage from './pages/products/ProductFaqPage'
+import ProductCustomizePage from './pages/products/ProductCustomizePage'
+import ServiceAboutPage from './pages/services/ServiceAboutPage'
+import ServiceContactPage from './pages/services/ServiceContactPage'
+import ServiceFaqPage from './pages/services/ServiceFaqPage'
+import ApparelSourcingPage from './pages/services/ApparelSourcingPage'
+import ManufacturingServicePage from './pages/services/ManufacturingServicePage'
 import { CartProvider } from './context/CartContext'
 
 function AppContent() {
-  const location = useLocation()
-  const isLandingPage = location.pathname === '/'
-
   return (
-    <div className="min-h-screen">
-      {!isLandingPage && (
-        <ErrorBoundary fallback={null}>
-          <HeaderSection />
-        </ErrorBoundary>
-      )}
-      <main className={isLandingPage ? '' : 'pt-16 lg:pt-20'}>
-              <Routes>
-                <Route path="/" element={
-                  <ErrorBoundary>
-                    <LandingPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/home" element={
-                  <ErrorBoundary>
-                    <HomePage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/products-page" element={
-                  <ErrorBoundary>
-                    <ProductsPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/services-page" element={
-                  <ErrorBoundary>
-                    <ServicesPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/products" element={
-                  <ErrorBoundary>
-                    <ProductListingPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/contact" element={
-                  <ErrorBoundary>
-                    <ContactUsPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/about" element={
-                  <ErrorBoundary>
-                    <AboutUsPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/customization" element={
-                  <ErrorBoundary>
-                    <Customization />
-                  </ErrorBoundary>
-                } />
-                <Route path="/inspection" element={
-                  <ErrorBoundary>
-                    <InspectionPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/cart" element={
-                  <ErrorBoundary>
-                    <CartPage />
-                  </ErrorBoundary>
-                } />
-                <Route path="/checkout" element={
-                  <ErrorBoundary>
-                    <CheckoutPage />
-                  </ErrorBoundary>
-                } />
-              </Routes>
-            </main>
-      {!isLandingPage && (
-        <ErrorBoundary fallback={null}>
-          <FooterSection />
-        </ErrorBoundary>
-      )}
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <ErrorBoundary>
+            <LandingPage />
+          </ErrorBoundary>
+        }
+      />
+
+      <Route
+        path="/products"
+        element={
+          <ErrorBoundary>
+            <ProductLayout />
+          </ErrorBoundary>
+        }
+      >
+        <Route
+          index
+          element={
+            <ErrorBoundary>
+              <ProductListingPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="category"
+          element={
+            <ErrorBoundary>
+              <ProductCategoryPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path=":productId"
+          element={
+            <ErrorBoundary>
+              <ProductDetailsPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="customize"
+          element={
+            <ErrorBoundary>
+              <ProductCustomizePage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="about"
+          element={
+            <ErrorBoundary>
+              <ProductAboutPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="contact"
+          element={
+            <ErrorBoundary>
+              <ProductContactPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="faq"
+          element={
+            <ErrorBoundary>
+              <ProductFaqPage />
+            </ErrorBoundary>
+          }
+        />
+      </Route>
+
+      <Route
+        path="/services"
+        element={
+          <ErrorBoundary>
+            <ServiceLayout />
+          </ErrorBoundary>
+        }
+      >
+        <Route
+          index
+          element={
+            <ErrorBoundary>
+              <ServicesPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="quality-inspection"
+          element={
+            <ErrorBoundary>
+              <InspectionPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="apparel-sourcing"
+          element={
+            <ErrorBoundary>
+              <ApparelSourcingPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="manufacturing"
+          element={
+            <ErrorBoundary>
+              <ManufacturingServicePage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="about"
+          element={
+            <ErrorBoundary>
+              <ServiceAboutPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="contact"
+          element={
+            <ErrorBoundary>
+              <ServiceContactPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="faq"
+          element={
+            <ErrorBoundary>
+              <ServiceFaqPage />
+            </ErrorBoundary>
+          }
+        />
+      </Route>
+
+      <Route path="/products-page" element={<Navigate to="/products" replace />} />
+      <Route path="/services-page" element={<Navigate to="/services" replace />} />
+      <Route path="/home" element={<Navigate to="/" replace />} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   )
 }
 
